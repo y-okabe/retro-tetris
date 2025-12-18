@@ -1,0 +1,338 @@
+/* レトロスタイルのフォント設定 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* リセットとベース設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #00ff00;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* CRTスキャンライン効果 */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* ヘッダー */
+header {
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+.title {
+    font-size: 48px;
+    color: #00ff00;
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: #00ffff;
+    letter-spacing: 4px;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+    to {
+        text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00;
+    }
+}
+
+/* ゲームラッパー */
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* 情報パネル */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 200px;
+}
+
+.info-box {
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #00ff00;
+    padding: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.info-label {
+    font-size: 10px;
+    color: #00ffff;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.info-value {
+    font-size: 24px;
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+}
+
+/* コントロールヒント */
+.controls-hint {
+    font-size: 8px;
+}
+
+.control-item {
+    color: #00ff00;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* ゲームエリア */
+.game-area {
+    position: relative;
+    display: inline-block;
+}
+
+#gameCanvas {
+    background: #000000;
+    border: 4px solid #00ff00;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 30px rgba(0, 255, 0, 0.1);
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#nextCanvas {
+    background: #000000;
+    border: 2px solid #00ffff;
+    display: block;
+    margin: 10px auto 0;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* オーバーレイ画面 */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    border: 4px solid #00ff00;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.overlay-content h2 {
+    font-size: 32px;
+    color: #00ff00;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px #00ff00;
+}
+
+.overlay-content p {
+    font-size: 14px;
+    color: #00ffff;
+    margin: 15px 0;
+    line-height: 1.8;
+}
+
+.subtitle-text {
+    font-size: 10px;
+    color: #ffff00;
+    margin-bottom: 30px;
+}
+
+.controls-info {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
+}
+
+.controls-info p {
+    font-size: 10px;
+    color: #00ff00;
+    margin: 10px 0;
+}
+
+/* 点滅アニメーション */
+.blink {
+    animation: blink 1s step-start infinite;
+    color: #ffff00 !important;
+    font-size: 12px !important;
+    margin-top: 30px !important;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* フッター */
+footer {
+    font-size: 8px;
+    color: #00ffff;
+    opacity: 0.7;
+    letter-spacing: 2px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+    .game-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .info-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        min-width: auto;
+    }
+    
+    .left-panel {
+        order: 1;
+    }
+    
+    .game-area {
+        order: 2;
+    }
+    
+    .right-panel {
+        order: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 32px;
+        letter-spacing: 4px;
+    }
+    
+    .subtitle {
+        font-size: 10px;
+    }
+    
+    #gameCanvas {
+        width: 250px;
+        height: 500px;
+    }
+    
+    .info-box {
+        padding: 10px;
+        min-width: 150px;
+    }
+    
+    .info-value {
+        font-size: 18px;
+    }
+    
+    .overlay-content h2 {
+        font-size: 24px;
+    }
+    
+    .overlay-content p {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .title {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+    
+    #gameCanvas {
+        width: 200px;
+        height: 400px;
+    }
+    
+    .info-box {
+        padding: 8px;
+        min-width: 120px;
+    }
+    
+    .info-label {
+        font-size: 8px;
+    }
+    
+    .info-value {
+        font-size: 14px;
+    }
+    
+    .controls-hint {
+        font-size: 6px;
+    }
+    
+    .overlay-content h2 {
+        font-size: 18px;
+    }
+    
+    .controls-info p {
+        font-size: 8px;
+    }
+}
+
+/* ピクセルパーフェクト表示 */
+canvas {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}

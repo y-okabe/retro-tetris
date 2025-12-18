@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レトロテトリス</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">TETRIS</h1>
+            <div class="subtitle">RETRO EDITION</div>
+        </header>
+        
+        <div class="game-wrapper">
+            <!-- 左側: スコア情報 -->
+            <div class="info-panel left-panel">
+                <div class="info-box">
+                    <div class="info-label">SCORE</div>
+                    <div class="info-value" id="score">0</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">HIGH SCORE</div>
+                    <div class="info-value" id="highScore">0</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">LEVEL</div>
+                    <div class="info-value" id="level">1</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">LINES</div>
+                    <div class="info-value" id="lines">0</div>
+                </div>
+            </div>
+            
+            <!-- 中央: ゲームボード -->
+            <div class="game-area">
+                <canvas id="gameCanvas" width="300" height="600"></canvas>
+                
+                <!-- ゲームオーバー画面 -->
+                <div id="gameOverScreen" class="overlay hidden">
+                    <div class="overlay-content">
+                        <h2>GAME OVER</h2>
+                        <p>SCORE: <span id="finalScore">0</span></p>
+                        <p class="blink">PRESS ENTER TO RESTART</p>
+                    </div>
+                </div>
+                
+                <!-- スタート画面 -->
+                <div id="startScreen" class="overlay">
+                    <div class="overlay-content">
+                        <h2>TETRIS</h2>
+                        <p class="subtitle-text">RETRO EDITION</p>
+                        <div class="controls-info">
+                            <p>← → : MOVE</p>
+                            <p>↑ : ROTATE</p>
+                            <p>↓ : SOFT DROP</p>
+                            <p>SPACE : HARD DROP</p>
+                            <p>P : PAUSE</p>
+                        </div>
+                        <p class="blink">PRESS ENTER TO START</p>
+                    </div>
+                </div>
+                
+                <!-- 一時停止画面 -->
+                <div id="pauseScreen" class="overlay hidden">
+                    <div class="overlay-content">
+                        <h2>PAUSED</h2>
+                        <p class="blink">PRESS P TO RESUME</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右側: ネクストブロック -->
+            <div class="info-panel right-panel">
+                <div class="info-box">
+                    <div class="info-label">NEXT</div>
+                    <canvas id="nextCanvas" width="120" height="120"></canvas>
+                </div>
+                <div class="info-box controls-hint">
+                    <div class="info-label">CONTROLS</div>
+                    <div class="control-item">← → MOVE</div>
+                    <div class="control-item">↑ ROTATE</div>
+                    <div class="control-item">↓ DROP</div>
+                    <div class="control-item">SPACE HARD</div>
+                    <div class="control-item">P PAUSE</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Yuta Okabe - CLASSIC GAMING EXPERIENCE</p>
+        </footer>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
