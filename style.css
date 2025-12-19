@@ -185,23 +185,29 @@ header {
 }
 
 .controls-info {
-    margin: 20px 0;
-    padding: 20px;
+    margin: 15px 0;
+    padding: 15px;
     background: rgba(0, 255, 0, 0.1);
     border: 2px solid #00ff00;
 }
 
 .controls-info p {
-    font-size: 10px;
+    font-size: 9px;
     color: #00ff00;
-    margin: 10px 0;
+    margin: 8px 0;
+    line-height: 1.4;
 }
 
 .control-section-title {
-    font-size: 12px !important;
+    font-size: 11px !important;
     color: #ffff00 !important;
-    margin-bottom: 15px !important;
+    margin-bottom: 12px !important;
     text-decoration: underline;
+}
+
+.keyboard-controls {
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
 }
 
 .touch-controls {
@@ -215,6 +221,24 @@ header {
 
 .touch-controls .control-section-title {
     color: #ffff00 !important;
+}
+
+/* スマートフォンではキーボード操作を非表示 */
+@media (hover: none) and (pointer: coarse) {
+    .keyboard-controls {
+        display: none;
+    }
+    
+    .touch-controls {
+        margin: 20px 0;
+    }
+}
+
+/* デスクトップではタッチ操作を非表示 */
+@media (hover: hover) and (pointer: fine) {
+    .touch-controls {
+        display: none;
+    }
 }
 
 /* 点滅アニメーション */
@@ -336,17 +360,25 @@ footer {
     }
     
     .controls-info {
-        margin: 15px 0;
-        padding: 15px;
+        margin: 12px 0;
+        padding: 12px;
     }
     
     .controls-info p {
         font-size: 7px;
-        margin: 8px 0;
+        margin: 6px 0;
+        line-height: 1.3;
     }
     
     .control-section-title {
-        font-size: 9px !important;
+        font-size: 8px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .overlay-content {
+        padding: 15px;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 }
 

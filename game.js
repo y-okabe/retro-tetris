@@ -118,10 +118,11 @@ function init() {
     // イベントリスナーの設定
     document.addEventListener('keydown', handleKeyPress);
     
-    // タッチイベントリスナーの設定
-    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-    canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+    // タッチイベントリスナーの設定（ゲームエリア全体に適用）
+    const gameArea = document.querySelector('.game-area');
+    gameArea.addEventListener('touchstart', handleTouchStart, { passive: false });
+    gameArea.addEventListener('touchmove', handleTouchMove, { passive: false });
+    gameArea.addEventListener('touchend', handleTouchEnd, { passive: false });
     
     // ボードの初期化
     initBoard();
