@@ -92,6 +92,15 @@ let dropInterval = 1000;
 let lastTime = 0;
 let animationId = null;
 
+// タッチ操作用の変数
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+let touchStartTime = 0;
+const SWIPE_THRESHOLD = 50; // スワイプと判定する最小距離（ピクセル）
+const TAP_THRESHOLD = 200; // タップと判定する最大時間（ミリ秒）
+
 // ========================================
 // 初期化
 // ========================================
@@ -108,6 +117,11 @@ function init() {
     
     // イベントリスナーの設定
     document.addEventListener('keydown', handleKeyPress);
+    
+    // タッチイベントリスナーの設定
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
     
     // ボードの初期化
     initBoard();
@@ -631,6 +645,79 @@ function handleKeyPress(e) {
             e.preventDefault();
             togglePause();
             break;
+    }
+}
+
+// ========================================
+// タッチ操作
+// ========================================
+function handleTouchStart(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = Date.now();
+}
+
+function handleTouchMove(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    touchEndX = touch.clientX;
+    touchEndY = touch.clientY;
+}
+
+function handleTouchEnd(e) {
+    e.preventDefault();
+    
+    const touchDuration = Date.now() - touchStartTime;
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const absDeltaX = Math.abs(deltaX);
+    const absDeltaY = Math.abs(deltaY);
+    
+    // タップ判定（短時間で小さい移動）
+    if (touchDuration < TAP_THRESHOLD && absDeltaX < 30 && absDeltaY < 30) {
+        handleTap();
+        return;
+    }
+    
+    // スワイプ判定
+    if (absDeltaX > SWIPE_THRESHOLD || absDeltaY > SWIPE_THRESHOLD) {
+        // 横方向のスワイプが優先
+        if (absDeltaX > absDeltaY) {
+            if (deltaX > 0) {
+                // 右スワイプ
+                moveRight();
+            } else {
+                // 左スワイプ
+                moveLeft();
+            }
+        } else {
+            // 縦方向のスワイプ
+            if (deltaY > 0) {
+                // 下スワイプ（ハードドロップ）
+                hardDrop();
+            }
+        }
+    }
+    
+    // リセット
+    touchStartX = 0;
+    touchStartY = 0;
+    touchEndX = 0;
+    touchEndY = 0;
+}
+
+function handleTap() {
+    // ゲーム開始前またはゲームオーバー時はゲームを開始
+    if (!isGameStarted || gameOver) {
+        startGame();
+        return;
+    }
+    
+    // ゲーム中はブロックを回転
+    if (isGameStarted && !gameOver && !isPaused) {
+        rotate();
     }
 }
 

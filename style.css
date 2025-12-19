@@ -185,7 +185,7 @@ header {
 }
 
 .controls-info {
-    margin: 30px 0;
+    margin: 20px 0;
     padding: 20px;
     background: rgba(0, 255, 0, 0.1);
     border: 2px solid #00ff00;
@@ -195,6 +195,26 @@ header {
     font-size: 10px;
     color: #00ff00;
     margin: 10px 0;
+}
+
+.control-section-title {
+    font-size: 12px !important;
+    color: #ffff00 !important;
+    margin-bottom: 15px !important;
+    text-decoration: underline;
+}
+
+.touch-controls {
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid #00ffff;
+}
+
+.touch-controls p {
+    color: #00ffff;
+}
+
+.touch-controls .control-section-title {
+    color: #ffff00 !important;
 }
 
 /* 点滅アニメーション */
@@ -315,8 +335,33 @@ footer {
         font-size: 18px;
     }
     
+    .controls-info {
+        margin: 15px 0;
+        padding: 15px;
+    }
+    
     .controls-info p {
-        font-size: 8px;
+        font-size: 7px;
+        margin: 8px 0;
+    }
+    
+    .control-section-title {
+        font-size: 9px !important;
+    }
+}
+
+/* タッチデバイス用の追加スタイル */
+@media (hover: none) and (pointer: coarse) {
+    #gameCanvas {
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    body {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
     }
 }
 
