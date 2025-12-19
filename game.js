@@ -120,9 +120,14 @@ function init() {
     
     // タッチイベントリスナーの設定（ゲームエリア全体に適用）
     const gameArea = document.querySelector('.game-area');
-    gameArea.addEventListener('touchstart', handleTouchStart, { passive: false });
-    gameArea.addEventListener('touchmove', handleTouchMove, { passive: false });
-    gameArea.addEventListener('touchend', handleTouchEnd, { passive: false });
+    if (gameArea) {
+        gameArea.addEventListener('touchstart', handleTouchStart, { passive: false });
+        gameArea.addEventListener('touchmove', handleTouchMove, { passive: false });
+        gameArea.addEventListener('touchend', handleTouchEnd, { passive: false });
+        
+        // Safari対策: clickイベントも追加
+        gameArea.addEventListener('click', handleClick);
+    }
     
     // ボードの初期化
     initBoard();
@@ -653,7 +658,11 @@ function handleKeyPress(e) {
 // タッチ操作
 // ========================================
 function handleTouchStart(e) {
-    e.preventDefault();
+    // Safariでのダブルタップズーム防止
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+    
     const touch = e.touches[0];
     touchStartX = touch.clientX;
     touchStartY = touch.clientY;
@@ -716,6 +725,11 @@ function handleTouchEnd(e) {
     touchStartY = 0;
     touchEndX = 0;
     touchEndY = 0;
+}
+
+function handleClick(e) {
+    // Safari用のフォールバック: clickイベントでもタップを処理
+    handleTap();
 }
 
 function handleTap() {

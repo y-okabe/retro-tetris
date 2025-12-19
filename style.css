@@ -390,10 +390,27 @@ footer {
         user-select: none;
     }
     
+    .game-area {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    .overlay {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
     body {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    * {
+        -webkit-tap-highlight-color: transparent;
     }
 }
 
