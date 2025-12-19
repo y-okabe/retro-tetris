@@ -657,14 +657,18 @@ function handleTouchStart(e) {
     const touch = e.touches[0];
     touchStartX = touch.clientX;
     touchStartY = touch.clientY;
+    touchEndX = touch.clientX;  // 初期値を設定
+    touchEndY = touch.clientY;  // 初期値を設定
     touchStartTime = Date.now();
 }
 
 function handleTouchMove(e) {
     e.preventDefault();
-    const touch = e.touches[0];
-    touchEndX = touch.clientX;
-    touchEndY = touch.clientY;
+    if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        touchEndX = touch.clientX;
+        touchEndY = touch.clientY;
+    }
 }
 
 function handleTouchEnd(e) {
@@ -679,6 +683,11 @@ function handleTouchEnd(e) {
     // タップ判定（短時間で小さい移動）
     if (touchDuration < TAP_THRESHOLD && absDeltaX < 30 && absDeltaY < 30) {
         handleTap();
+        // リセット
+        touchStartX = 0;
+        touchStartY = 0;
+        touchEndX = 0;
+        touchEndY = 0;
         return;
     }
     
